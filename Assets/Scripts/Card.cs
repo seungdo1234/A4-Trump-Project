@@ -13,7 +13,7 @@ public class Card : MonoBehaviour
 
     [SerializeField] private AudioClip flipAudio;
     private AudioSource audioSource;
-    
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -36,7 +36,9 @@ public class Card : MonoBehaviour
         }
         
         if(GameManager.instance.SecondCard != null) return;
-        
+
+        //Card에 붙여둔 Card_Flipped 스크립트를 가져와 FlippedCard 실행
+        GetComponent<Card_Flipped>().Flipped_Card();
         audioSource.PlayOneShot(flipAudio); // PlayOneShot : 오디오끼리 겹치지 않음
         anim.SetBool("isOpen",true);
         back.SetActive(false);
