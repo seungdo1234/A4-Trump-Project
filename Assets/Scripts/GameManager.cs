@@ -10,10 +10,13 @@ public class GameManager : MonoBehaviour
     
     public Card FirstCard { get; set; }
     public Card SecondCard { get; set; }
-    
+
     [SerializeField] private float maxTime;
+    
+    [SerializeField] private Text resultText; // 매칭 시도 횟수 텍스트
+    private int matchingCount; // 매칭 시도 횟수를 저장하는 변수
     [SerializeField] private Text timeText;
-    [SerializeField] private GameObject endText;
+    [SerializeField] private GameObject result_UI;
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
@@ -27,6 +30,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
+        matchingCount = 0; // 매칭 시도 횟수 초기화
         isPlay = false;
         timer = maxTime;
         audioSource = GetComponent<AudioSource>();
@@ -52,9 +56,11 @@ public class GameManager : MonoBehaviour
 
     private void GameEnd()
     {
+        // 매칭 시도 횟수 text 오브젝트에 저장
+        resultText.text = $"매칭 시도 : <color=red>{matchingCount}</color>";
         isPlay = true;
         Time.timeScale = 0f;
-        endText.SetActive(true);
+        result_UI.SetActive(true);
     }
     public void Matched()
     {
@@ -65,6 +71,7 @@ public class GameManager : MonoBehaviour
             FirstCard.DestroyCard();
             SecondCard.DestroyCard();
             CardCount -= 2;
+            
             if (CardCount == 0)
             {
                 GameEnd();
@@ -75,7 +82,8 @@ public class GameManager : MonoBehaviour
             FirstCard.CloseCard();
             SecondCard.CloseCard();
         }
-
+        
+        matchingCount++; // 매칭 시도 횟수 ++
         FirstCard = null;
         SecondCard = null;
     }
