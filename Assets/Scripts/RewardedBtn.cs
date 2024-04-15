@@ -31,7 +31,6 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("광고 로드 성공 : " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
         
     }
@@ -39,11 +38,9 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("광 로 성: " + adUnitId);
         
         if (adUnitId.Equals(_adUnitId))
         {
-            Debug.Log("광고 버튼 활성화");
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
