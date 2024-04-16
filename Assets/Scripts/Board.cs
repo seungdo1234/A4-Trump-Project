@@ -5,29 +5,73 @@ using System.Linq;
 
 public class Board : MonoBehaviour
 {
+    [SerializeField] private Card[] cards;
     [SerializeField] private GameObject cardPrefab;
     void Start()
     {
-        // 카드 번호
-        int[] arr = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
-        
-        // 카드 셔플
-        arr = arr.OrderBy(_ => Random.Range(0, 8)).ToArray();
+        // 난이도 별로 카드  (Easy = 8, Normal = 16, Hard = 24)
+        Init(8 * (int)DifficultyManager.instance.difficulty);
         
         // 카드 배정
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < cards.Length; i++)
         {
-            GameObject card = Instantiate(cardPrefab, transform);
 
             float x = (i % 4) * 1.2f - 1.8f;
             float y = (i / 4) * 1.2f - 2.6f;
             
-            card.transform.position = new Vector3(x, y , 0);
-            card.GetComponent<Card>().Setting(arr[i]);
+            cards[i].transform.position = new Vector3(x, y , 0);
         }
-
-        GameManager.instance.CardCount = arr.Length;
+        
+        // 난이도 별로 카드 위치 조정
+        if (DifficultyManager.instance.difficulty == Difficulty.Easy)
+        {
+            transform.position += new Vector3(0, 1.5f, 0);
+        }
+        else if (DifficultyManager.instance.difficulty == Difficulty.Hard)
+        {
+            transform.position += new Vector3(0, -1.5f, 0);
+        }
     }
 
+    // 초기화 함수
+    public void Init(int count)
+    {
+        // Cards 배열 초기화
+        cards = new Card[count];
+        
+        int num = 0;
+        for (int i = 0; i < count; i++) // 생성된 카드마다 번호 부여
+        {
+            // 카드 생성
+            GameObject card = Instantiate(cardPrefab, transform);
+            cards[i] = card.GetComponent<Card>();
+            cards[i].Setting(num); // 번호 부여
+
+            if (i % 2 == 1) // 홀수가 됐을때 카드 번호 ++
+            {
+                num++;
+            }
+        }
+
+        Shuffle(); // 카드 섞는 함수
+
+        GameManager.instance.CardCount = cards.Length;
+    }
+    private void Shuffle()
+    {
+        int random1, random2;
+        Card tmp;
+ 
+        // 2개의 랜덤 변수를 저장한 뒤 Swap
+        for (int index = 0; index < cards.Length; ++index)
+        {
+            random1 = Random.Range(0, cards.Length);
+            random2 = Random.Range(0, cards.Length);
+ 
+            tmp = cards[random1];
+            cards[random1] = cards[random2];
+            cards[random2] = tmp;
+        }
+    }
 }
     
