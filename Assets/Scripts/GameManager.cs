@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject endText;
     [SerializeField] private Image timerBackground; // 타이머 배경 이미지
     [SerializeField] private AudioClip speedAudioClip; // 긴박한 배경음악 클립
+    [SerializeField] private Color timerTextColor = Color.red;
+
 
     private AudioSource audioSource;
+
     [SerializeField] private AudioClip matchAudio;
     public int CardCount { get; set; }
     public bool isPlay;
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
         isPlay = false;
         timer = maxTime;
         audioSource = GetComponent<AudioSource>();
+        timeText.color = Color.white; // 초기 색상 설정
     }
 
     private void Start()
@@ -47,25 +51,24 @@ public class GameManager : MonoBehaviour
         //타이머값 > ui 표시
         timeText.text = $"{timer:F2}";
 
-        // 10초 이하일 때
-        if (timer <= 10f)
-        {
-            //배경색 붉게 변경[1f=red 0.5f=green/blue]
-            timerBackground.color = new Color(1f, 0.5f, 0.5f);
 
-            //배경음악이 재생 중이 아닌 경우
-            if (!audioSource.isPlaying)
-            {
-                //audioSource의 클립 = 긴박한 배경음악 클립
-                audioSource.clip = speedAudioClip;
-                //긴박한 배경음악 재생
-                audioSource.Play();
-            }
+
+        // 5초 이하일 때
+        if (timer <= 5.1f && timer > 5f)
+
+        {
+            //텍스트색 붉게 변경[1f=red 0.5f=green/blue]
+            timeText.color = timerTextColor;
+
+            AudioManager.Instance.ChangeBGM(speedAudioClip);
+
         }
         else
         {
             // 타이머 이미지 배경색 원래대로 변경
             timerBackground.color = Color.white;
+
+            Debug.LogError("player is null in GameManager.Update()");
 
             //배경음악 중지
             audioSource.Stop();
