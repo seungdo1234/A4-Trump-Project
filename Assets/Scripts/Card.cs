@@ -12,7 +12,11 @@ public class Card : MonoBehaviour
      public int idx = 0;
 
     [SerializeField] private AudioClip flipAudio;
+    [SerializeField] private AudioClip successSound;
+    [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
+
+    private IEnumerator AnimCoroutine;
 
     private void Awake()
     {
@@ -41,21 +45,9 @@ public class Card : MonoBehaviour
         GetComponent<Card_Flipped>().Flipped_Card();
         audioSource.PlayOneShot(flipAudio); // PlayOneShot : 오디오끼리 겹치지 않음
         anim.SetBool("isOpen",true);
-        back.SetActive(false);
-        front.SetActive(true);
-        
-        // 카드 비교
-        if (GameManager.instance.FirstCard == null)
-        {
-            // FirstCard에 내 정보를 넘겨준다.
-            GameManager.instance.FirstCard = this;
-        } // FirstCard가 비어 있지 않다면
-        else
-        {
-            // SecondCard에 내 정보를 넘겨준다.
-            GameManager.instance.SecondCard = this;
-            GameManager.instance.Matched(); // 매치
-        }
+
+        AnimCoroutine = WaitForAnim(0.1f);
+        StartCoroutine(AnimCoroutine);
     }
     public void DestroyCard() // 카드 파괴
     {
@@ -72,8 +64,30 @@ public class Card : MonoBehaviour
     }
     public void CloseCardInvoke() // 카드 클로즈
     {
+        StopCoroutine(AnimCoroutine);
         anim.SetBool("isOpen",false);
         back.SetActive(true);
         front.SetActive(false);
+    }
+
+    private IEnumerator WaitForAnim(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        back.SetActive(false);
+        front.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+
+        // 카드 비교
+        if (GameManager.instance.FirstCard == null)
+        {
+            // FirstCard에 내 정보를 넘겨준다.
+            GameManager.instance.FirstCard = this;
+        } // FirstCard가 비어 있지 않다면
+        else
+        {
+            // SecondCard에 내 정보를 넘겨준다.
+            GameManager.instance.SecondCard = this;
+            GameManager.instance.Matched(); // 매치
+        }
     }
 }
