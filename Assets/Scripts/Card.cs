@@ -12,6 +12,8 @@ public class Card : MonoBehaviour
     [HideInInspector] public int idx = 0;
 
     [SerializeField] private AudioClip flipAudio;
+    [SerializeField] private AudioClip successSound;
+    [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
 
     private void Awake()

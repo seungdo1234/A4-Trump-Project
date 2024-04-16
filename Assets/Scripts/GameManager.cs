@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
+    [SerializeField] private AudioClip failAudio;
     public int CardCount { get; set; }
     public bool isPlay;
     private float timer = 0;
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour
         }
         else // 같지 않다면
         {
+            audioSource.PlayOneShot(failAudio);
             FirstCard.CloseCard();
             SecondCard.CloseCard();
         }

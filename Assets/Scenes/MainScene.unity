@@ -1108,7 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c13b3685e9ff24694ef1805ca01682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgm: {fileID: 8300000, guid: 76fc5429093e33c439dcb8c73158633e, type: 3}
+  bgm: {fileID: 8300000, guid: faf9be9e3609fb44b96252afa9e16e25, type: 3}
 --- !u!4 &1658577310
 Transform:
   m_ObjectHideFlags: 0
@@ -1226,7 +1226,8 @@ MonoBehaviour:
   resultText: {fileID: 1613377226}
   timeText: {fileID: 827359487}
   result_UI: {fileID: 1426102586}
-  matchAudio: {fileID: 8300000, guid: ffe3db75197095648b9ac255379053fe, type: 3}
+  matchAudio: {fileID: 8300000, guid: 6aa1be72709f9a04b88a10276f0b4d74, type: 3}
+  failAudio: {fileID: 8300000, guid: d0d097c0501af474a913a3fd3bbdb957, type: 3}
   isPlay: 0
 --- !u!4 &1790202457
 Transform:
