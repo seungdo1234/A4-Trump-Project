@@ -603,7 +603,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827359485}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 72f15f0b78a829c4e84d2fb62b32137f, type: 2}
   m_CullingMode: 0
@@ -1143,8 +1143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c13b3685e9ff24694ef1805ca01682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 0}
-  urgentClip: {fileID: 0}
+  bgm: {fileID: 8300000, guid: faf9be9e3609fb44b96252afa9e16e25, type: 3}
 --- !u!4 &1658577310
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3018393776496856246, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6107172680802228212, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1262,14 +1261,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba04397076a66048b2c4486a5bf235e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 60
+  maxTime: 10
   resultText: {fileID: 1613377226}
   timeText: {fileID: 827359487}
-  endText: {fileID: 1426102586}
-  timerBackground: {fileID: 0}
-  speedAudioClip: {fileID: 0}
-  timerTextColor: {r: 1, g: 0, b: 0, a: 1}
-  matchAudio: {fileID: 8300000, guid: ffe3db75197095648b9ac255379053fe, type: 3}
+  result_UI: {fileID: 1426102586}
+  matchAudio: {fileID: 8300000, guid: 6aa1be72709f9a04b88a10276f0b4d74, type: 3}
+  bgm1: {fileID: 8300000, guid: b553d4e872f32644fb63025abbd60cc3, type: 3}
   isPlay: 0
 --- !u!4 &1790202457
 Transform:
