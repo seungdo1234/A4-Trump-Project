@@ -376,8 +376,9 @@ MonoBehaviour:
   front: {fileID: 3807913579226874824}
   back: {fileID: 7147507435683059159}
   idx: 0
-  flipAudio: {fileID: 8300000, guid: b90b8ec9af1ca3f4f873ec92b682006d, type: 3}
-  Back: {fileID: 7232855357935130198}
+  flipAudio: {fileID: 8300000, guid: 1583c85e066724a499f75ac9daa3bd21, type: 3}
+  successSound: {fileID: 0}
+  failureSound: {fileID: 8300000, guid: d0d097c0501af474a913a3fd3bbdb957, type: 3}
 --- !u!95 &9082533217657156152
 Animator:
   serializedVersion: 5
