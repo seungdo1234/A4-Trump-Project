@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -372,7 +372,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 453342822}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 272211130}
+        m_TargetAssemblyTypeName: RewardedBtn, Assembly-CSharp
+        m_MethodName: ShowAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &453342822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,6 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c786024c1899c44488a6206d587c84e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cards: []
   cardPrefab: {fileID: 4023642124551756203, guid: e1b130b52bd5e8f42831916f663effba, type: 3}
 --- !u!1 &1474037125
 GameObject:
@@ -1134,7 +1147,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: _testMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: _rewardedBtn
@@ -1143,6 +1156,10 @@ PrefabInstance:
     - target: {fileID: 3018393776496856246, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_Name
       value: AdManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018393776496856246, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6107172680802228212, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_LocalPosition.x

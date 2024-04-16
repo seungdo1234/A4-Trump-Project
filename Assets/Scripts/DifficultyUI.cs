@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RetryBtn : MonoBehaviour
+public class DifficultyUI : MonoBehaviour
 {
     
-    public void Retry()
+    // 난이도 설정
+    public void SetDifficulty(int dif)
     {
+        DifficultyManager.instance.difficulty = (Difficulty)dif;
+        
         SceneManager.LoadScene("MainScene");
     }
-    
-    
-
 }

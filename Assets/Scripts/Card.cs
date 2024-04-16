@@ -9,7 +9,7 @@ public class Card : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject front;
     [SerializeField] private GameObject back;
-    [HideInInspector] public int idx = 0;
+     public int idx = 0;
 
     [SerializeField] private AudioClip flipAudio;
     private AudioSource audioSource;
