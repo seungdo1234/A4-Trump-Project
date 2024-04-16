@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance ;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
 
+        
         matchingCount = 0; // 매칭 시도 횟수 초기화
         isPlay = false;
         timer = maxTime;
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
         {
             timer = 0;
             GameEnd();
+            
         }
     }
 

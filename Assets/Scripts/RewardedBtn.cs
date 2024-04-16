@@ -21,7 +21,7 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 #endif
 
         // Disable the button until the ad is ready to show:
-        _showAdButton.interactable = false;
+        // _showAdButton.interactable = false;
         LoadAd();
     }
     
@@ -41,6 +41,7 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         
         if (adUnitId.Equals(_adUnitId))
         {
+            Debug.Log("광고 로드 성공");
             // Configure the button to call the ShowAd() method when clicked:
             _showAdButton.onClick.AddListener(ShowAd);
             // Enable the button for users to click:
@@ -64,7 +65,7 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("StartScene");
         }
     }
  

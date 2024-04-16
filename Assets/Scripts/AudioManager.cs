@@ -26,7 +26,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        BGM_On(bgm);
+    }
+
+    
+    // 효율적인 코딩
+    public void BGM_On(AudioClip bgm)
+    {
+        // bgm을 플레이하는 코드
         audioSource.clip = bgm;
-        audioSource.Play();
+        audioSource.Play(); 
     }
 }
