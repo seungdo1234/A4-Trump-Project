@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject result_UI;
 
     private AudioSource audioSource;
+    [SerializeField] private Animator Timer_Anim;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip failAudio;
     public int CardCount { get; set; }
@@ -83,6 +84,8 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(failAudio);
             FirstCard.CloseCard();
             SecondCard.CloseCard();
+            Timer_Anim.SetTrigger("Fail");
+            timer -= 2;
         }
         
         matchingCount++; // 매칭 시도 횟수 ++

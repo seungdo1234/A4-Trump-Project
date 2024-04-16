@@ -16,7 +16,7 @@ public class Card : MonoBehaviour
     [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
 
-    [HideInInspector] public IEnumerator AnimCoroutine;
+    private IEnumerator AnimCoroutine;
 
     private void Awake()
     {
