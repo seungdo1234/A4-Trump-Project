@@ -11,7 +11,13 @@ public class Board : MonoBehaviour
     {
         // 난이도 별로 카드  (Easy = 8, Normal = 16, Hard = 24)
         Init(8 * (int)DifficultyManager.instance.difficulty);
-        
+
+        SetPosition();
+    }
+
+
+    private void SetPosition() // 카드 배치 함수
+    {
         // 카드 배정
         for (int i = 0; i < cards.Length; i++)
         {
@@ -32,7 +38,6 @@ public class Board : MonoBehaviour
             transform.position += new Vector3(0, -1.5f, 0);
         }
     }
-
     // 초기화 함수
     public void Init(int count)
     {
@@ -56,7 +61,7 @@ public class Board : MonoBehaviour
         Shuffle(); // 카드 섞는 함수
 
         GameManager.instance.CardCount = cards.Length;
-    }
+    } 
     private void Shuffle()
     {
         int random1, random2;

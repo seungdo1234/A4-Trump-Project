@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         result_UI.SetActive(true);
     }
-    public void Matched()
+    public void Matched()   
     {
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
