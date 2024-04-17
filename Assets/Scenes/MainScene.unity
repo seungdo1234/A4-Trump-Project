@@ -1172,8 +1172,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
+      propertyPath: _iOSGameId
+      value: 5599143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: _rewardedBtn
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
+      propertyPath: _androidGameId
+      value: 5599142
       objectReference: {fileID: 0}
     - target: {fileID: 3018393776496856246, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_Name
