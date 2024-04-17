@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
         if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
         {
             AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
-            AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
             isBgm1Played = true;
             timeText.color = Color.red;
         }
