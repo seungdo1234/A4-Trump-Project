@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance ;
+    public static GameManager instance;
     public Card FirstCard { get; set; }
     public Card SecondCard { get; set; }
-    
+
     [SerializeField] private float maxTime;
     [SerializeField] private Text resultText; // 매칭 시도 횟수 텍스트
     private int matchingCount; // 매칭 시도 횟수를 저장하는 변수
@@ -21,10 +21,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
 
     public int CardCount { get; set; }
-    [HideInInspector]public bool isPlay;
+    [HideInInspector] public bool isPlay;
     private float timer = 0;
     private bool isBgm1Played = false; //// 2024.04.16
     private MatchFailText Match_Fail;
+    public Text endText; // 2024.04.17
 
     private void Awake()
     {
@@ -44,22 +45,60 @@ public class GameManager : MonoBehaviour
 
         timeText.color = Color.white;
     }
-    void Update()
+    void Update() //2024.04.17
     {
-        
+        isPlay = true;
+        Time.timeScale = 0f;
+        result_UI.SetActive(true);
+
         timer -= Time.deltaTime;
         timeText.text = $"{timer:F2}";
-        if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
+        if (!isBgm1Played && timer > 0.1f && timer <= 5f)  // 2024.04.16
         {
             AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
             isBgm1Played = true;
             timeText.color = Color.red;
         }
-        if (timer <= 0 )
+        if (timer <= 0)
         {
             timer = 0;
             GameEnd();
         }
+        //여기부터 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
+        float cardPercentage; // 이거 2개는 그냥 float 변수 생성
+        float cardScore;
+
+        if (GameManager.instance.CardCount != 0) // 시간안에 카드 다 못부쉈을때
+        {
+            cardPercentage = ((float)(16 - CardCount) / (float)16) * 100f; // 파괴된 카드 백분율
+            cardScore = Mathf.Max(50f * (cardPercentage / 100f), 0f); // 남은 카드를 기준으로 한 점수
+        }
+
+        //여기까지 ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+
+        else
+        {
+            cardPercentage = 100f; // 모든 카드를 파괴한 경우
+            cardScore = 50f; // 점수는 50점
+        }
+
+        float timePercentage = (timer / maxTime) * 100f; // 타이머 사용 시간 백분율
+        float timeScore = Mathf.Max(0, 50f - (50f * (100f - timePercentage) / 100f)); // 타이머 시간을 기준으로 한 점수
+
+
+        float totalScore = timeScore + cardScore; // 총 점수
+
+        // Debug.Log("카드 백분율: " + cardPercentage);
+        // Debug.Log("카드 점수: " + cardScore); // 여기가 문젠데..
+        // Debug.Log("타이머 백분율: " + timePercentage);
+        // Debug.Log("타이머 점수: " + timeScore);
+        // Debug.Log("총 점수: " + totalScore);
+
+        // Debug.Log("GameManager CardCount: " + GameManager.instance.CardCount);
+        // Debug.Log("CardCount: " + CardCount);
+
+        endText.text = $"점수 : {totalScore:F0}"; // 점수 표시
     }
     private void GameEnd()
     {
@@ -69,7 +108,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         result_UI.SetActive(true);
     }
-    public void Matched()   
+    public void Matched()
     {
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
