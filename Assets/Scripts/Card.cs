@@ -29,7 +29,7 @@ public class Card : MonoBehaviour
         idx = number;
         
         // Resources.Load<형태>("리소스 이름");
-        rtanImage.sprite =  Resources.Load<Sprite>($"rtan{idx}");
+        rtanImage.sprite =  Resources.Load<Sprite>($"four{idx}");
     }
 
     public void OpenCard() // 카드 오픈
