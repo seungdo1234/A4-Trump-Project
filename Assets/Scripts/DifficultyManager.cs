@@ -29,6 +29,7 @@ public class DifficultyManager : MonoBehaviour
         
     }
 
+    // Easy나 Normal을 처음 클리어 했을 경우 실행되는 함수
     public void UnLock()
     {
         // 현재 언락된 난이도가 현재 진행중인 게임의 난이도이고 언락된 난이도가 이지, 노말일 때
