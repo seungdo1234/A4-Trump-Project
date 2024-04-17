@@ -14,14 +14,18 @@ public class GameManager : MonoBehaviour
     private int matchingCount; // 매칭 시도 횟수를 저장하는 변수
     [SerializeField] private Text timeText;
     [SerializeField] private GameObject result_UI;
+    [SerializeField] private GameObject MatchFailText; // 매칭이 실패했을 때 나오는 시간 차감 텍스트
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16
-    
+    [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
+
     public int CardCount { get; set; }
     [HideInInspector]public bool isPlay;
     private float timer = 0;
     private bool isBgm1Played = false; //// 2024.04.16
+    private MatchFailText Match_Fail;
+
     private void Awake()
     {
         if (instance == null)
@@ -32,6 +36,7 @@ public class GameManager : MonoBehaviour
         isPlay = false;
         timer = maxTime;
         audioSource = GetComponent<AudioSource>();
+        Match_Fail = MatchFailText.GetComponent<MatchFailText>();
     }
     private void Start()
     {
@@ -82,6 +87,10 @@ public class GameManager : MonoBehaviour
         {
             FirstCard.CloseCard();
             SecondCard.CloseCard();
+            MatchFailText.SetActive(true);
+            timer -= 2;
+            Match_Fail.Fail();
+            Text_Animator.SetTrigger("Fail");
         }
         matchingCount++; // 매칭 시도 횟수 ++
         FirstCard = null;

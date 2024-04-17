@@ -423,6 +423,98 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 453342819}
   m_CullTransparentMesh: 1
+--- !u!1 &509640897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509640898}
+  - component: {fileID: 509640900}
+  - component: {fileID: 509640899}
+  - component: {fileID: 509640901}
+  m_Layer: 5
+  m_Name: Fail_TimeText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &509640898
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509640897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1474037129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 220, y: 320}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &509640899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509640897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 415abd21d1d6dcc48a3fa758cdf52383, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 50
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: -2.00
+--- !u!222 &509640900
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509640897}
+  m_CullTransparentMesh: 1
+--- !u!114 &509640901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509640897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29429c77569e9c04ebfeacf6c34a7930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,7 +695,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827359485}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 72f15f0b78a829c4e84d2fb62b32137f, type: 2}
   m_CullingMode: 0
@@ -851,6 +943,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 827359486}
+  - {fileID: 509640898}
   - {fileID: 1426102587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1172,8 +1265,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
+      propertyPath: _iOSGameId
+      value: 5599143
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: _rewardedBtn
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276443312042827673, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
+      propertyPath: _androidGameId
+      value: 5599142
       objectReference: {fileID: 0}
     - target: {fileID: 3018393776496856246, guid: 69d5823e110e9b14f9e0ae2c30aeccf4, type: 3}
       propertyPath: m_Name
@@ -1265,8 +1366,10 @@ MonoBehaviour:
   resultText: {fileID: 1613377226}
   timeText: {fileID: 827359487}
   result_UI: {fileID: 1426102586}
+  MatchFailText: {fileID: 509640897}
   matchAudio: {fileID: 8300000, guid: 6aa1be72709f9a04b88a10276f0b4d74, type: 3}
   bgm1: {fileID: 8300000, guid: b553d4e872f32644fb63025abbd60cc3, type: 3}
+  Text_Animator: {fileID: 827359489}
   isPlay: 0
 --- !u!4 &1790202457
 Transform:

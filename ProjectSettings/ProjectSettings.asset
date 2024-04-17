@@ -852,6 +852,7 @@ PlayerSettings:
   metroTileBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21568628, a: 0}
   metroSplashScreenBackgroundColor: {r: 0.12941177, g: 0.17254902, b: 0.21568628, a: 1}
   metroSplashScreenUseBackgroundColor: 0
+  syncCapabilities: 0
   platformCapabilities: {}
   metroTargetDeviceFamilies: {}
   metroFTAName: 
@@ -906,10 +907,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 1af5eaa8-908d-4d84-81ed-408e487920ca
+  cloudProjectId: dfc4be28-add6-4461-9c56-bc6a52863697
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: FindRtan
+  projectName: A4-Trump-Project
   organizationId: twotwo12345678
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
