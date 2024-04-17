@@ -1362,7 +1362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba04397076a66048b2c4486a5bf235e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 10
+  maxTime: 60
   resultText: {fileID: 1613377226}
   timeText: {fileID: 827359487}
   result_UI: {fileID: 1426102586}
