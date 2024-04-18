@@ -70,7 +70,7 @@
 <br/>
 
 ## :bulb: 이슈    
-- [이슈 사항 바로가](https://www.notion.so/teamsparta/403042fee3254991b8f03f1985c335be?v=ab61fa54deee444cb1fc0900ccf979ff)
+- [이슈 사항](https://www.notion.so/teamsparta/403042fee3254991b8f03f1985c335be?v=ab61fa54deee444cb1fc0900ccf979ff)
    
         
 
