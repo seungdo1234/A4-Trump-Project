@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endText: {fileID: 1613377226}
-  dif: 0
 --- !u!4 &9894969
 Transform:
   m_ObjectHideFlags: 0
@@ -1509,6 +1508,7 @@ MonoBehaviour:
   matchAudio: {fileID: 8300000, guid: 6aa1be72709f9a04b88a10276f0b4d74, type: 3}
   bgm1: {fileID: 8300000, guid: b553d4e872f32644fb63025abbd60cc3, type: 3}
   Text_Animator: {fileID: 827359489}
+  scoreManager: {fileID: 9894968}
   isPlay: 0
   timer: 0
 --- !u!4 &1790202457

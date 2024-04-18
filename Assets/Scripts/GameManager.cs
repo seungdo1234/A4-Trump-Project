@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
@@ -9,20 +10,24 @@ public class GameManager : MonoBehaviour
     public Card FirstCard { get; set; }
     public Card SecondCard { get; set; }
 
-    [SerializeField] public float maxTime;//2024.04.18 박재우
+    [Header("# Game Information")]
+    public float maxTime;//2024.04.18 박재우
+    
+    [Header("# Objects")]
     [SerializeField] private Text resultText; // 매칭 시도 횟수 텍스트
     public int matchingCount { get; private set; } // 2024.04.18 박재우
     [SerializeField] private Text timeText;
     [SerializeField] private GameObject result_UI;
     [SerializeField] private GameObject MatchFailText; // 매칭이 실패했을 때 나오는 시간 차감 텍스트
-    private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16 박재우
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
-
+    [SerializeField] private ScoreManager scoreManager;
+    
+    private AudioSource audioSource;
     public int CardCount { get; set; } //2024.04.18 박재우
     [HideInInspector] public bool isPlay; //2024.04.18 박재우
-    public float timer = 0; //2024.04.18 박재우
+    [HideInInspector] public float timer = 0; //2024.04.18 박재우
     private bool isBgm1Played = false; //// 2024.04.16 박재우
     private MatchFailText Match_Fail;
 
@@ -84,6 +89,9 @@ public class GameManager : MonoBehaviour
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
         {
+            // 점수 상승
+            scoreManager.UpdateScoreText();
+            
             audioSource.PlayOneShot(matchAudio);
             FirstCard.DestroyCard();
             SecondCard.DestroyCard();

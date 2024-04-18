@@ -19,7 +19,7 @@ public class DifficultyManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // 씬을 이동해도 AudioManager가 파괴되지않음
+            DontDestroyOnLoad(gameObject); // 씬을 이동해도 DifficultyManager가 파괴되지않음
         }
         else
         {
