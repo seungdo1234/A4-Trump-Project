@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.UI;
 
 public class Board : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Board : MonoBehaviour
         // 난이도 별로 카드  (Easy = 8, Normal = 16, Hard = 24)
         Init(8 * (int)DifficultyManager.instance.difficulty);
         SetPosition();
+        //SetPosition으로 설정된 각 카드의 위치로 이동시키는 코루틴 실행
         for (int i=0; i<cards.Length; i++)
         {
             StartAnim = Card_Move(i);
@@ -95,11 +97,17 @@ public class Board : MonoBehaviour
         }
     }
 
+    // 게임시작 카드 이동 애니메이션 코루틴
     private IEnumerator Card_Move(int idx)
     {
         while(cards[idx].transform.position != cards_pos[idx])
         {
+            //Vector3.MoveTowards(시작지점,도착지점,이동량(속도)
+            //현재 카드의 위치를 각 카드의 도착지점까지 speed * Time.deltaTime의 속도로 이동
             cards[idx].transform.position = Vector3.MoveTowards(cards[idx].transform.position, cards_pos[idx], speed * Time.deltaTime);
+
+            //yield return null 은 1프레임당 이 코루틴을 1프레임당 실행시켜줌
+            //도착할때까지 while문 반복을 통해 각자의 위치로 이동
             yield return null;
         }
     }

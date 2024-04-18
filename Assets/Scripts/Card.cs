@@ -19,6 +19,7 @@ public class Card : MonoBehaviour
     [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
 
+    //카드 뒤집기 애니메이션 실행 중 대기 코루틴
     private IEnumerator AnimCoroutine;
 
     private void Awake()
@@ -89,13 +90,16 @@ public class Card : MonoBehaviour
         front.SetActive(false);
     }
 
+    //카드 애니메이션 재생 대기 코루틴
     private IEnumerator WaitForAnim(float waitTime)
     {
+        //yield return new WaitForSeconds(float)는 매개변수의 값만큼의 Seconds 이후 뒤의 작업 실행
         yield return new WaitForSeconds(waitTime);
         back.SetActive(false);
         front.SetActive(true);
         yield return new WaitForSeconds(waitTime);
 
+        // 카드 애니메이션이 재생되는 동안 카드가 매치 되어 사라지는 것을 방지하기 위해 코드 이동
         // 카드 비교
         if (GameManager.instance.FirstCard == null)
         {
