@@ -38,7 +38,7 @@ public class Board : MonoBehaviour
             float y = (i / 4) * 1.2f - 2.6f;
 
             cards_pos[i] = new Vector3(x, y, 0);
-            //cards[i].transform.position = new Vector3(x, y , 0);
+            //cards[i].transform.position = new Vector3(x, y , 0); 기존코드
         }
 
         // 난이도 별로 카드 위치 조정
