@@ -182,6 +182,8 @@ public class GameManager : MonoBehaviour
             CardCount -= 2;
             if (CardCount == 0)
             {
+                float shortTime = maxTime - timer; 
+                DifficultyManager.instance.UnLock(shortTime);
                 GameEnd();
             }
         }
