@@ -80,7 +80,8 @@ public class GameManager : MonoBehaviour
             CardCount -= 2;
             if (CardCount == 0)
             {
-                DifficultyManager.instance.UnLock();
+                float shortTime = maxTime - timer; 
+                DifficultyManager.instance.UnLock(shortTime);
                 GameEnd();
             }
         }

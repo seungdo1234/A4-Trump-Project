@@ -29,14 +29,26 @@ public class DifficultyManager : MonoBehaviour
         
     }
 
-    public void UnLock()
+    // Easy나 Normal을 처음 클리어 했을 경우 실행되는 함수
+    public void UnLock(float shortTime)
     {
+        // 최단 시간 저장
+        SaveScore(shortTime);
+        
         // 현재 언락된 난이도가 현재 진행중인 게임의 난이도이고 언락된 난이도가 이지, 노말일 때
         if (unLockDifficulty == (int)difficulty - 1 && unLockDifficulty < 2)
         {
             // 난이도 데이터 저장 (이지 -> 노말) (노말 -> 하드)
             PlayerPrefs.SetInt("Difficulty_Info",++unLockDifficulty );
         }
-        
-    } 
+    }
+
+    private void SaveScore(float shortTime)
+    {
+        float sT = PlayerPrefs.GetFloat(difficulty + "ShortTime");
+        if (sT == 0 || shortTime < sT) // 기존에 저장된 시간보다 빠르다면
+        {
+            PlayerPrefs.SetFloat(difficulty +"ShortTime", shortTime);
+        }
+    }
 }
