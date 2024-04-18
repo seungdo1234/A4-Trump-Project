@@ -18,9 +18,16 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
         audioSource = GetComponent<AudioSource>();
     }
     private void Start()
+    {
+        BGM_On(bgm);
+    }
+
+    // 2024.04.18 - 은지, 기본 배경 음악으로 변경해주는 함수
+    public void SwitchBGMtoStandard()
     {
         BGM_On(bgm);
     }

@@ -21,7 +21,7 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
 #endif
 
         // Disable the button until the ad is ready to show:
-         _showAdButton.interactable = false;
+        // _showAdButton.interactable = false;
         LoadAd();
     }
     
@@ -52,6 +52,8 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
+        // 2024.04.18 - 은지, 광고 보여질 때 BGM 멈추기
+        AudioManager.instance.StopBGM();
         // Disable the button:
         _showAdButton.interactable = false;
         // Then show the ad:
@@ -66,6 +68,9 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
             SceneManager.LoadScene("StartScene");
+            // 2024.04.18 - 은지, 시작 씬 로드될 때 배경음악 변경 & play
+            AudioManager.instance.SwitchBGMtoStandard();
+            Time.timeScale = 1.0f;
         }
     }
  
