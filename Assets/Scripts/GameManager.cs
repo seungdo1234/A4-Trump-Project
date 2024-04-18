@@ -114,11 +114,8 @@ public class GameManager : MonoBehaviour
         result_UI.SetActive(true);
 
         //2024.04.18
-
         float cardPercentage; // 이거 2개는 그냥 float 변수 생성
         float cardScore = 0f;
-
-
 
         if (matchingCount == 0) // 시간 다 쓸때까지 매칭시도를 한번도 안했을 때
         {
