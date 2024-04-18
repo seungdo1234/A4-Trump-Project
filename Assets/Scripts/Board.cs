@@ -26,6 +26,8 @@ public class Board : MonoBehaviour
             StartAnim = Card_Move(i);
             StartCoroutine(StartAnim);
         }
+
+        StartCoroutine(CardPos_Match());
     }
 
     private void SetPosition() // 카드 배치 함수
@@ -113,6 +115,31 @@ public class Board : MonoBehaviour
             yield return null;
         }
         cards[idx].FlipBtn.enabled = true;
+    }
+
+    // 모든 카드가 제자리로 이동했는지 확인하는 코루틴
+    private IEnumerator CardPos_Match() 
+    {
+        int i = 0;
+        
+        while (true)
+        {
+            if (cards[i].transform.position != cards_pos[i]) // 한 카드라도 지정된 위치에 도달하지 못했을 때
+            {
+                i = 0;
+            }
+            else 
+            {
+                i++;
+                if (i == cards.Length - 1) // 모든 카드가 지정된 위치에 도달했을 때
+                {
+                    // 카드 배치 완료
+                    GameManager.instance.isMove = false;
+                    break;
+                }
+            }
+            yield return null;
+        }
     }
 }
     

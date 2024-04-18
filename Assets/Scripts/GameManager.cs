@@ -25,6 +25,9 @@ public class GameManager : MonoBehaviour
     public float displayTime = 1f; // 텍스트가 표시될 시간
     private float displayTimer = 0f; // 텍스트 표시 타이머
 
+    // 카드가 배치될 때 true
+    [HideInInspector] public bool isMove;
+    
     public int CardCount { get; set; }
     [HideInInspector]public bool isPlay;
     private float timer = 0;
@@ -46,32 +49,35 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-
+        isMove = true;
+        timeText.text = $"{maxTime}";
         timeText.color = Color.white;
     }
     void Update()
     {
-        
-        timer -= Time.deltaTime;
-        timeText.text = $"{timer:F2}";
-        if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
+        if (!isMove)
         {
-            AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
-            isBgm1Played = true;
-            timeText.color = Color.red;
-        }
-        if (timer <= 0 )
-        {
-            timer = 0;
-            Time.timeScale = 0f; // 게임 일시정지
-        }
-        // 텍스트가 활성화되어 있고, 표시 시간이 지났으면 비활성화
-        if (displayText.gameObject.activeSelf && displayTimer > 0f)
-        {
-            displayTimer -= Time.deltaTime;
-            if (displayTimer <= 0f)
+            timer -= Time.deltaTime;
+            timeText.text = $"{timer:F2}";
+            if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
             {
-                displayText.gameObject.SetActive(false);
+                AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
+                isBgm1Played = true;
+                timeText.color = Color.red;
+            }
+            if (timer <= 0 )
+            {
+                timer = 0;
+                Time.timeScale = 0f; // 게임 일시정지
+            }
+            // 텍스트가 활성화되어 있고, 표시 시간이 지났으면 비활성화
+            if (displayText.gameObject.activeSelf && displayTimer > 0f)
+            {
+                displayTimer -= Time.deltaTime;
+                if (displayTimer <= 0f)
+                {
+                    displayText.gameObject.SetActive(false);
+                }
             }
         }
     }
