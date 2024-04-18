@@ -22,7 +22,7 @@
 
 <br/>
 
-## :bulb: 플레이 영상 
+## :bulb: 플레이 영상 (클릭 시 이동)
 
 [![Video Label](http://img.youtube.com/vi/fN7Nprhum38/0.jpg)](https://youtu.be/fN7Nprhum38) 
 
