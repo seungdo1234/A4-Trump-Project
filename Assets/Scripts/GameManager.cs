@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
             if (timer <= 0 )
             {
                 timer = 0;
-                Time.timeScale = 0f; // 게임 일시정지
+                GameEnd();
             }
             // 텍스트가 활성화되어 있고, 표시 시간이 지났으면 비활성화
             if (displayText.gameObject.activeSelf && displayTimer > 0f)
