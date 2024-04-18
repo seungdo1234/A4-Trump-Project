@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         result_UI.SetActive(true);
     }
-    public void Matched()   
+    public void Matched()
     {
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
@@ -88,6 +88,7 @@ public class GameManager : MonoBehaviour
         }
         else // 같지 않다면
         {
+            
             FirstCard.CloseCard();
             SecondCard.CloseCard();
             MatchFailText.SetActive(true);
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
             Text_Animator.SetTrigger("Fail");
             audioSource.PlayOneShot(FailAudio);
         }
+        
         matchingCount++; // 매칭 시도 횟수 ++
         FirstCard = null;
         SecondCard = null;

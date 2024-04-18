@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer rtanImage;
+    [SerializeField] private SpriteRenderer a4_Image;
     [SerializeField] private Animator anim;
     [SerializeField] private GameObject front;
     [SerializeField] private GameObject back;
@@ -19,8 +19,9 @@ public class Card : MonoBehaviour
     [SerializeField] private AudioClip successSound;
     [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
-    [HideInInspector] public Button FlipBtn;
 
+    [HideInInspector] public Button FlipBtn;
+    
     //카드 뒤집기 애니메이션 실행 중 대기 코루틴
     private IEnumerator AnimCoroutine;
 
@@ -35,6 +36,7 @@ public class Card : MonoBehaviour
         if (isOpen)
         {
             Time_Limit -= Time.deltaTime;
+
             if(Time_Limit <= 0.0f)
             {
                 CloseCardInvoke();
@@ -50,7 +52,7 @@ public class Card : MonoBehaviour
         idx = number;
         
         // Resources.Load<형태>("리소스 이름");
-        rtanImage.sprite =  Resources.Load<Sprite>($"four{idx}");
+        a4_Image.sprite =  Resources.Load<Sprite>($"four{idx}");
     }
 
     public void OpenCard() // 카드 오픈
@@ -83,6 +85,8 @@ public class Card : MonoBehaviour
 
     public void CloseCard() // 카드 클로즈
     {
+        // 24.04.18 승도 => 카드 자동 Close. 이슈 해결
+        isOpen = false;
         Invoke(nameof(CloseCardInvoke), 0.5f);
     }
     public void CloseCardInvoke() // 카드 클로즈
