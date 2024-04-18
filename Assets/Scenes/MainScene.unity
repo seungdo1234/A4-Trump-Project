@@ -1462,6 +1462,7 @@ MonoBehaviour:
   MatchFailText: {fileID: 509640897}
   matchAudio: {fileID: 8300000, guid: 6aa1be72709f9a04b88a10276f0b4d74, type: 3}
   bgm1: {fileID: 8300000, guid: b553d4e872f32644fb63025abbd60cc3, type: 3}
+  FailAudio: {fileID: 8300000, guid: d0d097c0501af474a913a3fd3bbdb957, type: 3}
   Text_Animator: {fileID: 827359489}
   isPlay: 0
 --- !u!4 &1790202457

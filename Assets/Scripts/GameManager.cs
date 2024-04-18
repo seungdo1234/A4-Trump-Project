@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16
+    [SerializeField] private AudioClip FailAudio; // 2024.04.18
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
 
     public int CardCount { get; set; }
@@ -93,6 +94,7 @@ public class GameManager : MonoBehaviour
             timer -= 2;
             Match_Fail.Fail();
             Text_Animator.SetTrigger("Fail");
+            audioSource.PlayOneShot(FailAudio);
         }
         matchingCount++; // 매칭 시도 횟수 ++
         FirstCard = null;
