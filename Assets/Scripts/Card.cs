@@ -11,6 +11,9 @@ public class Card : MonoBehaviour
     [SerializeField] private GameObject back;
      public int idx = 0;
 
+    private float Time_Limit; //카드가 열린 후 다음 카드 선택까지의 시간제한 변수
+    private bool isOpen = false; //카드가 열린 것을 Update에서 확인하기 위한 bool 변수
+
     [SerializeField] private AudioClip flipAudio;
     [SerializeField] private AudioClip successSound;
     [SerializeField] private AudioClip failureSound;
@@ -21,6 +24,20 @@ public class Card : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    public void Update()
+    {
+        if (isOpen)
+        {
+            Time_Limit -= Time.deltaTime;
+            if(Time_Limit <= 0.0f)
+            {
+                CloseCardInvoke();
+                isOpen = false;
+                GameManager.instance.FirstCard = null;
+            }
+        }
     }
 
     public void Setting(int number) // 카드 초기화
@@ -41,6 +58,8 @@ public class Card : MonoBehaviour
         
         if(GameManager.instance.SecondCard != null) return;
 
+        isOpen = true; //카드가 뒤집힌 것을 확인해주는 Bool을 true로 변경
+        Time_Limit = 2.0f; //카드가 뒤집힌 시점을 기준으로 시간제한 초기화
         //Card에 붙여둔 Card_Flipped 스크립트를 가져와 FlippedCard 실행
         GetComponent<Card_Flipped>().Flipped_Card();
         audioSource.PlayOneShot(flipAudio); // PlayOneShot : 오디오끼리 겹치지 않음
