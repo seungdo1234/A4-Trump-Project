@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16
+    [SerializeField] private AudioClip FailAudio; // 2024.04.18
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
     public string[] cardNames; // 이미지에 매칭될 이름 배열
     public Text displayText; // 텍스트를 표시할 UI(Text) 요소
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         result_UI.SetActive(true);
     }
-    public void Matched()   
+    public void Matched()
     {
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
@@ -109,13 +110,16 @@ public class GameManager : MonoBehaviour
         }
         else // 같지 않다면
         {
+            
             FirstCard.CloseCard();
             SecondCard.CloseCard();
             MatchFailText.SetActive(true);
             timer -= 2;
             Match_Fail.Fail();
             Text_Animator.SetTrigger("Fail");
+            audioSource.PlayOneShot(FailAudio);
         }
+        
         matchingCount++; // 매칭 시도 횟수 ++
         FirstCard = null;
         SecondCard = null;

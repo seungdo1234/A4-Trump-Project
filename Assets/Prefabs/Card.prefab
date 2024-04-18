@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8206b9308f448934c89c50fecc5a9676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rtanImage: {fileID: 3209307009419609058}
+  a4_Image: {fileID: 3209307009419609058}
   anim: {fileID: 9082533217657156152}
   front: {fileID: 3807913579226874824}
   back: {fileID: 7147507435683059159}
