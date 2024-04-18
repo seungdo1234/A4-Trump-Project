@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip FailAudio; // 2024.04.18
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
 
+    // 카드가 배치될 때 true
+    [HideInInspector] public bool isMove;
+    
     public int CardCount { get; set; }
     [HideInInspector]public bool isPlay;
     private float timer = 0;
@@ -42,24 +45,27 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1f;
-
+        isMove = true;
+        timeText.text = $"{maxTime}";
         timeText.color = Color.white;
     }
     void Update()
     {
-        
-        timer -= Time.deltaTime;
-        timeText.text = $"{timer:F2}";
-        if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
+        if (!isMove)
         {
-            AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
-            isBgm1Played = true;
-            timeText.color = Color.red;
-        }
-        if (timer <= 0 )
-        {
-            timer = 0;
-            GameEnd();
+            timer -= Time.deltaTime;
+            timeText.text = $"{timer:F2}";
+            if ( !isBgm1Played && timer > 0.1f && timer <= 5f  )  // 2024.04.16
+            {
+                AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
+                isBgm1Played = true;
+                timeText.color = Color.red;
+            }
+            if (timer <= 0 )
+            {
+                timer = 0;
+                GameEnd();
+            }
         }
     }
     private void GameEnd()
