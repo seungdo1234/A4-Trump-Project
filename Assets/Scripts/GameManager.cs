@@ -17,17 +17,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject MatchFailText; // 매칭이 실패했을 때 나오는 시간 차감 텍스트
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
-    [SerializeField] private AudioClip bgm1; // 2024.04.16
+    [SerializeField] private AudioClip bgm1; // 2024.04.16 박재우
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
 
     public int CardCount { get; set; }
     [HideInInspector] public bool isPlay;
     private float timer = 0;
-    private bool isBgm1Played = false; //// 2024.04.16
+    private bool isBgm1Played = false; //// 2024.04.16 박재우
     private MatchFailText Match_Fail;
-    public Text endText; // 2024.04.17
+    public Text endText; // 2024.04.17 박재우
 
-    //2024.04.18
+    //2024.04.18 박재우
 
     public enum Difficulty
     {
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public Difficulty difficulty;
     int cardCount = 0;
 
-    //2024.04.18--
+    //2024.04.18--박재우
 
 
     private void Awake()
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
 
         timeText.color = Color.white;
 
-        //2024.04.18
+        //2024.04.18 박재우
 
         switch (difficulty)
         {
@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
 
-        //2024.04.18 --
+        //2024.04.18 -- 박재우
 
 
     }
@@ -86,9 +86,9 @@ public class GameManager : MonoBehaviour
 
         timer -= Time.deltaTime;
         timeText.text = $"{timer:F2}";
-        if (!isBgm1Played && timer > 0.1f && timer <= 5f)  // 2024.04.16
+        if (!isBgm1Played && timer > 0.1f && timer <= 5f)  // 2024.04.16 박재우
         {
-            AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16
+            AudioManager.instance.SwitchBGM(bgm1); // 2024.04.16 박재우
             isBgm1Played = true;
             timeText.color = Color.red;
         }
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         result_UI.SetActive(true);
 
-        //2024.04.18
+        //2024.04.18 박재우
         float cardPercentage; // 이거 2개는 그냥 float 변수 생성
         float cardScore = 0f;
 
@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         float timeScore = Mathf.Max(0, 50f - (50f * (100f - timePercentage) / 100f)); // 타이머 시간을 기준으로 한 점수
 
 
-        float totalScore = timeScore + cardScore; // 총 점수
+        float totalScore = timeScore + cardScore; // 총 점수 박재우
 
         // Debug.Log("카드 백분율: " + cardPercentage);
         Debug.Log("매칭시도횟수: " + matchingCount);
@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
         endText.text = $"점수 : {totalScore:F0}"; // 점수 표시
 
-        //2024.04.18 --
+        //2024.04.18 박재우
 
     }
     public void Matched()
