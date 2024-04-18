@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
+    public string[] cardNames; // 이미지에 매칭될 이름 배열
+    public Text displayText; // 텍스트를 표시할 UI(Text) 요소
+    public float displayTime = 1f; // 텍스트가 표시될 시간
+    private float displayTimer = 0f; // 텍스트 표시 타이머
 
     public int CardCount { get; set; }
     [HideInInspector]public bool isPlay;
@@ -58,7 +62,16 @@ public class GameManager : MonoBehaviour
         if (timer <= 0 )
         {
             timer = 0;
-            GameEnd();
+            Time.timeScale = 0f; // 게임 일시정지
+        }
+        // 텍스트가 활성화되어 있고, 표시 시간이 지났으면 비활성화
+        if (displayText.gameObject.activeSelf && displayTimer > 0f)
+        {
+            displayTimer -= Time.deltaTime;
+            if (displayTimer <= 0f)
+            {
+                displayText.gameObject.SetActive(false);
+            }
         }
     }
     private void GameEnd()
@@ -74,16 +87,25 @@ public class GameManager : MonoBehaviour
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
         {
+            // 매칭된 카드의 이미지에 해당하는 텍스트 표시
+            displayText.text = cardNames[FirstCard.idx]; // 카드의 idx에 해당하는 이름을 가져와서 표시
+
             audioSource.PlayOneShot(matchAudio);
             FirstCard.DestroyCard();
             SecondCard.DestroyCard();
             CardCount -= 2;
+
+            // 매칭이 이루어지면 텍스트를 활성화하고 displayTime 이후에 다시 비활성화합니다.
+            displayText.gameObject.SetActive(true);
+            displayTimer = displayTime; // 텍스트 표시 타이머 초기화
+
             if (CardCount == 0)
             {
-                float shortTime = maxTime - timer; 
+                float shortTime = maxTime - timer;
                 DifficultyManager.instance.UnLock(shortTime);
                 GameEnd();
             }
+                
         }
         else // 같지 않다면
         {
