@@ -25,6 +25,21 @@ public class GameManager : MonoBehaviour
     private float timer = 0;
     private bool isBgm1Played = false; //// 2024.04.16
     private MatchFailText Match_Fail;
+    public Text endText; // 2024.04.17
+
+    //2024.04.18
+
+    public enum Difficulty
+    {
+        Easy,
+        Normal,
+        Hard
+    }
+    public Difficulty difficulty;
+    int cardCount = 0;
+
+    //2024.04.18--
+
 
     private void Awake()
     {
@@ -43,6 +58,28 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         timeText.color = Color.white;
+
+        //2024.04.18
+
+        switch (difficulty)
+        {
+            case Difficulty.Easy:
+                cardCount = 8;
+                break;
+            case Difficulty.Normal:
+                cardCount = 16;
+                break;
+            case Difficulty.Hard:
+                cardCount = 24;
+                break;
+            default:
+                cardCount = 8;
+                break;
+        }
+
+        //2024.04.18 --
+
+
     }
     void Update()
     {
@@ -59,15 +96,80 @@ public class GameManager : MonoBehaviour
         {
             timer = 0;
             GameEnd();
+            
+        if (timer <= 0)
+
+                    isPlay = true;
+        Time.timeScale = 0f;
+        result_UI.SetActive(true);
+
         }
     }
     private void GameEnd()
     {
         // 매칭 시도 횟수 text 오브젝트에 저장
-        resultText.text = $"매칭 시도 : <color=red>{matchingCount}</color>";
+
         isPlay = true;
         Time.timeScale = 0f;
         result_UI.SetActive(true);
+
+        //2024.04.18
+
+        float cardPercentage; // 이거 2개는 그냥 float 변수 생성
+        float cardScore = 0f;
+
+
+
+        if (matchingCount == 0) // 시간 다 쓸때까지 매칭시도를 한번도 안했을 때
+        {
+            cardScore = 0f;
+        }
+
+        else
+        {
+            cardPercentage = ((float)(GameManager.instance.CardCount) / cardCount) * 100f;
+            if (matchingCount >= 0 && matchingCount <= cardCount) // 0~8
+            {
+                cardScore = 50f; // 50점
+            }
+            else if (matchingCount > cardCount && matchingCount <= cardCount * 1.5f) // 9~12
+            {
+                cardScore = 40f; // 40점
+            }
+            else if (matchingCount > cardCount * 1.5f && matchingCount <= cardCount * 2) // 13~16
+            {
+                cardScore = 30f; // 30점
+            }
+            else if (matchingCount > cardCount * 2 && matchingCount <= cardCount * 2.5f) // 17~20
+            {
+                cardScore = 20f; // 20점
+            }
+            else if (matchingCount > cardCount * 2.5f) // 21~
+            {
+                cardScore = 10f; // 10점
+            }
+        }
+
+        float timePercentage = (timer / maxTime) * 100f; // 타이머 사용 시간 백분율
+        float timeScore = Mathf.Max(0, 50f - (50f * (100f - timePercentage) / 100f)); // 타이머 시간을 기준으로 한 점수
+
+
+        float totalScore = timeScore + cardScore; // 총 점수
+
+        // Debug.Log("카드 백분율: " + cardPercentage);
+        Debug.Log("매칭시도횟수: " + matchingCount);
+        Debug.Log("카드 점수: " + cardScore);
+        // Debug.Log("타이머 백분율: " + timePercentage);
+        Debug.Log("타이머 점수: " + timeScore);
+        Debug.Log("총 점수: " + totalScore);
+
+        // Debug.Log("GameManager CardCount: " + GameManager.instance.CardCount);
+        // Debug.Log("CardCount: " + CardCount);
+
+        endText.text = $"점수 : {totalScore:F0}"; // 점수 표시
+
+        //2024.04.18 --
+
     }
     public void Matched()
     {
