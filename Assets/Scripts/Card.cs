@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -18,12 +19,14 @@ public class Card : MonoBehaviour
     [SerializeField] private AudioClip successSound;
     [SerializeField] private AudioClip failureSound;
     private AudioSource audioSource;
+    [HideInInspector] public Button FlipBtn;
 
     //카드 뒤집기 애니메이션 실행 중 대기 코루틴
     private IEnumerator AnimCoroutine;
 
     private void Awake()
     {
+        FlipBtn = back.GetComponent<Button>();
         audioSource = GetComponent<AudioSource>();
     }
 

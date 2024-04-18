@@ -100,6 +100,8 @@ public class Board : MonoBehaviour
     // 게임시작 카드 이동 애니메이션 코루틴
     private IEnumerator Card_Move(int idx)
     {
+        //카드가 이동하는 동안에 버튼 컴포넌트를 비활성화 하여 이동중에 클릭이 되는 현상을 방지
+        cards[idx].FlipBtn.enabled = false;
         while(cards[idx].transform.position != cards_pos[idx])
         {
             //Vector3.MoveTowards(시작지점,도착지점,이동량(속도)
@@ -110,6 +112,7 @@ public class Board : MonoBehaviour
             //도착할때까지 while문 반복을 통해 각자의 위치로 이동
             yield return null;
         }
+        cards[idx].FlipBtn.enabled = true;
     }
 }
     
