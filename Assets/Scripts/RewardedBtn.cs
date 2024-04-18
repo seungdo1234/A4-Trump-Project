@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
 public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
+    [SerializeField] private SceneLoading sceneLoading;
      [SerializeField] Button _showAdButton;
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
@@ -63,14 +63,14 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)
     {
+        
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            SceneManager.LoadScene("StartScene");
-            // 2024.04.18 - 은지, 시작 씬 로드될 때 배경음악 변경 & play
-            AudioManager.instance.SwitchBGMtoStandard();
-            Time.timeScale = 1.0f;
+            // 24.04.18 승도 => 씬 로딩창 구현으로 인한 수정
+            sceneLoading.gameObject.SetActive(true);
+            sceneLoading.MoveScene();
         }
     }
  

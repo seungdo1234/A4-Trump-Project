@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SceneLoading : MonoBehaviour
 {
@@ -13,12 +14,12 @@ public class SceneLoading : MonoBehaviour
     private void Awake()
     {
         loadingImage = GetComponentInChildren<Image>();
-        
-        StartCoroutine(StartLoading(0, 1));
+        gameObject.SetActive(false);
     }
 
     public void MoveScene()
     {
+        Time.timeScale = 1.0f;
         if (isMainScene)
         {
             StartCoroutine(StartLoading(0, 1));
@@ -42,6 +43,8 @@ public class SceneLoading : MonoBehaviour
             
             yield return null;
         }
-
+        // 2024.04.18 - 은지, 시작 씬 로드될 때 배경음악 변경 & play
+        AudioManager.instance.SwitchBGMtoStandard();
+        SceneManager.LoadScene("StartScene");
     }
 }
