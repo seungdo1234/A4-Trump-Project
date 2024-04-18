@@ -69,7 +69,7 @@ public class Card : MonoBehaviour
         //Card에 붙여둔 Card_Flipped 스크립트를 가져와 FlippedCard 실행
         GetComponent<Card_Flipped>().Flipped_Card();
         audioSource.PlayOneShot(flipAudio); // PlayOneShot : 오디오끼리 겹치지 않음
-        anim.SetBool("isOpen",true);
+        anim.SetTrigger("isOpen");
 
         AnimCoroutine = WaitForAnim(0.1f);
         StartCoroutine(AnimCoroutine);
@@ -92,7 +92,7 @@ public class Card : MonoBehaviour
     public void CloseCardInvoke() // 카드 클로즈
     {
         StopCoroutine(AnimCoroutine);
-        anim.SetBool("isOpen",false);
+        anim.SetTrigger("isOpen");
         back.SetActive(true);
         front.SetActive(false);
     }
