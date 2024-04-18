@@ -25,6 +25,7 @@ public class Board : MonoBehaviour
         {
             StartAnim = Card_Move(i);
             StartCoroutine(StartAnim);
+            
         }
     }
 
@@ -113,6 +114,30 @@ public class Board : MonoBehaviour
             yield return null;
         }
         cards[idx].FlipBtn.enabled = true;
+    }
+
+    private IEnumerator CardPos_Match()
+    {
+        int i = 0;
+        
+        while (true)
+        {
+
+            if (cards[i].transform.position != cards_pos[i])
+            {
+                i = 0;
+            }
+            else
+            {
+                i++;
+                if (i == cards.Length - 1)
+                {
+                    
+                    break;
+                }
+            }
+            yield return null;
+        }
     }
 }
     
