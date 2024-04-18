@@ -24,6 +24,8 @@
 
 ## :bulb: 플레이 영상 
 
+[![Video Label](http://img.youtube.com/vi/fN7Nprhum38/0.jpg)](https://youtu.be/fN7Nprhum38) 
+
 <br/>
 
 ## :bulb: 기능
