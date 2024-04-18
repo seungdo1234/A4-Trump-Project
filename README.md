@@ -59,5 +59,18 @@
 
     8. [스테이지 선택과 현재 해금한 스테이지가 구분 가능한 시작 화면 만들기](https://www.notion.so/teamsparta/Lock-UnLock-64503d7f367a434585d0731a96e1b93e?pvs=23)    
 
-    9. [플레이 중 해당 스테이지의 최단 기록 띄워주기](https://www.notion.so/teamsparta/dc5dcf865a9a4433809d1bf56a40e1cc)  
+    9. [플레이 중 해당 스테이지의 최단 기록 띄워주기](https://www.notion.so/teamsparta/dc5dcf865a9a4433809d1bf56a40e1cc)
+
+ <br/>
+
+ 
+- 기타 추가 사항
+   1. [Android 빌드 테스트](https://www.notion.so/teamsparta/34f643a88e834595be47aba76e82a2e8)
+
+<br/>
+
+## :bulb: 이슈    
+- [이슈 사항 바로가](https://www.notion.so/teamsparta/403042fee3254991b8f03f1985c335be?v=ab61fa54deee444cb1fc0900ccf979ff)
+   
+        
 
