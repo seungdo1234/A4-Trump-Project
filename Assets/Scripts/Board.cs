@@ -2,32 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class Board : MonoBehaviour
 {
     [SerializeField] private Card[] cards;
     [SerializeField] private GameObject cardPrefab;
+    private Vector3[] cards_pos;
+
+    private float speed = 5.0f;
+
+    private IEnumerator StartAnim;
+
     void Start()
     {
         // 난이도 별로 카드  (Easy = 8, Normal = 16, Hard = 24)
         Init(8 * (int)DifficultyManager.instance.difficulty);
-
         SetPosition();
+        for (int i=0; i<cards.Length; i++)
+        {
+            StartAnim = Card_Move(i);
+            StartCoroutine(StartAnim);
+        }
     }
-
 
     private void SetPosition() // 카드 배치 함수
     {
-        // 카드 배정
-        for (int i = 0; i < cards.Length; i++)
-        {
-
-            float x = (i % 4) * 1.2f - 1.8f;
-            float y = (i / 4) * 1.2f - 2.6f;
-            
-            cards[i].transform.position = new Vector3(x, y , 0);
-        }
-        
         // 난이도 별로 카드 위치 조정
         if (DifficultyManager.instance.difficulty == Difficulty.Easy)
         {
@@ -37,12 +37,26 @@ public class Board : MonoBehaviour
         {
             transform.position += new Vector3(0, -1.5f, 0);
         }
+
+        // 카드 배정
+        for (int i = 0; i < cards.Length; i++)
+        {
+
+            float x = (i % 4) * 1.2f - 1.8f;
+            float y = (i / 4) * 1.2f - 2.6f;
+
+            cards_pos[i] = new Vector3(x, y, 0);
+            //cards[i].transform.position = cards_pos[i];
+            //cards[i].transform.position = new Vector3(x, y , 0);
+            
+        }
     }
     // 초기화 함수
     public void Init(int count)
     {
         // Cards 배열 초기화
         cards = new Card[count];
+        cards_pos = new Vector3[count];
         
         int num = 0;
         for (int i = 0; i < count; i++) // 생성된 카드마다 번호 부여
@@ -76,6 +90,15 @@ public class Board : MonoBehaviour
             tmp = cards[random1];
             cards[random1] = cards[random2];
             cards[random2] = tmp;
+        }
+    }
+
+    private IEnumerator Card_Move(int idx)
+    {
+        while(cards[idx].transform.position != cards_pos[idx])
+        {
+            cards[idx].transform.position = Vector3.MoveTowards(cards[idx].transform.position, cards_pos[idx], speed * Time.deltaTime);
+            yield return null;
         }
     }
 }
