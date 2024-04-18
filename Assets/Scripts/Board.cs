@@ -28,16 +28,6 @@ public class Board : MonoBehaviour
 
     private void SetPosition() // 카드 배치 함수
     {
-        // 난이도 별로 카드 위치 조정
-        if (DifficultyManager.instance.difficulty == Difficulty.Easy)
-        {
-            transform.position += new Vector3(0, 1.5f, 0);
-        }
-        else if (DifficultyManager.instance.difficulty == Difficulty.Hard)
-        {
-            transform.position += new Vector3(0, -1.5f, 0);
-        }
-
         // 카드 배정
         for (int i = 0; i < cards.Length; i++)
         {
@@ -46,9 +36,21 @@ public class Board : MonoBehaviour
             float y = (i / 4) * 1.2f - 2.6f;
 
             cards_pos[i] = new Vector3(x, y, 0);
-            //cards[i].transform.position = cards_pos[i];
             //cards[i].transform.position = new Vector3(x, y , 0);
-            
+        }
+
+        // 난이도 별로 카드 위치 조정
+        if (DifficultyManager.instance.difficulty == Difficulty.Easy)
+        {
+            transform.position += new Vector3(0, 1.5f, 0);
+            for (int i = 0; i < cards.Length; i++)
+                cards_pos[i] += new Vector3(0, 1.5f, 0);
+        }
+        else if (DifficultyManager.instance.difficulty == Difficulty.Hard)
+        {
+            transform.position += new Vector3(0, -1.5f, 0);
+            for (int i = 0; i < cards.Length; i++)
+                cards_pos[i] += new Vector3(0, -1.5f, 0);
         }
     }
     // 초기화 함수
