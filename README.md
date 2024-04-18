@@ -17,7 +17,7 @@
  
  `Team Member` **박재우, 이시원, 정은지, 지승도, 최재원**
  
- `Team Notion` [SA 페이지 바로가기](#https://www.notion.so/teamsparta/A-4-Four-Complete-FC-4-03624d1601534897a5d72c723f64c223)
+ `Team Notion` [SA 페이지 바로가기](https://www.notion.so/teamsparta/A-4-Four-Complete-FC-4-03624d1601534897a5d72c723f64c223)
 
 
 ## 플레이 영상 
