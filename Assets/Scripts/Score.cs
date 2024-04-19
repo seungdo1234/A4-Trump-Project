@@ -19,7 +19,8 @@ public class Score : MonoBehaviour //2024.04.18
     {
         float timePercentage = gm.timer / gm.maxTime * 100f;
         int score = CalculateScore(timePercentage);
-        resultUI.TextChange(ResultTextType.Score,  $"<color=red>{score}</color> 점");
+       // resultUI.TextChange(ResultTextType.Score,  $"<color=red>{score}</color> 점");
+       gm.ResultUI.TextChange(ResultTextType.Score,  $"<color=red>{score}</color> 점");
     }
 
     private int CalculateScore(float timePercentage)

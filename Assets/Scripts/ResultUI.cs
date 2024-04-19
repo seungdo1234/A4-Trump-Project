@@ -13,9 +13,14 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private GameObject result_UI;
 
     // 텍스트를 바꾸는 함수
-    public void TextChange(ResultTextType type, string format)
+    /// <summary>
+    ///  설명
+    /// </summary>
+    /// <param name="type">타입설명</param>
+    /// <param name="text"></param>
+    public void TextChange(ResultTextType type, string text)
     {
-        resultTexts[(int)type].text = format;
+        resultTexts[(int)type].text = text;
     }
 
     // result UI On/Off
