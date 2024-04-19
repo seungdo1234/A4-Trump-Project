@@ -9,6 +9,9 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private Card[] cards;
     [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private GameObject easyBoard;
+    [SerializeField] private GameObject normalBoard;
+    [SerializeField] private GameObject hardBoard;
     private Vector3[] cards_pos;
 
     private float speed = 5.0f;
@@ -28,6 +31,7 @@ public class Board : MonoBehaviour
         }
 
         StartCoroutine(CardPos_Match());
+        ActivateBoardByDifficulty(); // 난이도에 따른 보드 활성화
     }
 
     private void SetPosition() // 카드 배치 함수
@@ -57,6 +61,15 @@ public class Board : MonoBehaviour
                 cards_pos[i] += new Vector3(0, -1.5f, 0);
         }
     }
+
+    // 난이도에 따른 보드 활성화
+    private void ActivateBoardByDifficulty()
+    {
+        if (easyBoard != null) easyBoard.SetActive(DifficultyManager.instance.difficulty == Difficulty.Easy);
+        if (normalBoard != null) normalBoard.SetActive(DifficultyManager.instance.difficulty == Difficulty.Normal);
+        if (hardBoard != null) hardBoard.SetActive(DifficultyManager.instance.difficulty == Difficulty.Hard);
+    }
+      
     // 초기화 함수
     public void Init(int count)
     {
