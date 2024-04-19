@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public Card SecondCard { get; set; }
     
     [Header("# Game Information")]
-    public float maxTime;
+    public float[] maxTime;
     
     [Header("# Component")]
     [SerializeField] private ResultUI resultUI; // 매칭 시도 횟수 텍스트
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         }
         matchingCount = 0; // 매칭 시도 횟수 초기화
         isPlay = false;
-        timer = maxTime;
+        timer = maxTime[(int)DifficultyManager.instance.difficulty - 1];
         audioSource = GetComponent<AudioSource>();
         Match_Fail = MatchFailText.GetComponent<MatchFailText>();
     }
@@ -57,7 +57,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         isMove = true;
-        timeText.text = $"{maxTime}";
         timeText.color = Color.white;
     }
     void Update()
@@ -133,7 +132,7 @@ public class GameManager : MonoBehaviour
             {
                 resultUI.TextChange(ResultTextType.Title,  $"Game Clear !");
                 isClear = true;
-                float shortTime = maxTime - timer;
+                float shortTime = maxTime[(int)DifficultyManager.instance.difficulty - 1] - timer;
                 DifficultyManager.instance.UnLock(shortTime);
                 GameEnd();
             }

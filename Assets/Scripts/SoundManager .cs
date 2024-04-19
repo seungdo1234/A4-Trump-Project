@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour //2024.04.19 ¹ÚÀç¿ì
+public class SoundManager : MonoBehaviour //2024.04.19 ë°•ì¬ìš°
 {
-    private static SoundManager instance; // SoundManager ÀÎ½ºÅÏ½º
-    private AudioSource soundSource; // »ç¿îµå¸¦ Àç»ıÇÒ AudioSource
+    private static SoundManager instance; // SoundManager ì¸ìŠ¤í„´ìŠ¤
+    private AudioSource soundSource; // ì‚¬ìš´ë“œë¥¼ ì¬ìƒí•  AudioSource
 
     void Awake()
     {
-        if (instance == null) // ÀÎ½ºÅÏ½º°¡ ¾øÀ¸¸é
+        if (instance == null) // ì¸ìŠ¤í„´ìŠ¤ê°€ ì—†ìœ¼ë©´
         {
-            instance = this; // ÇöÀç ÀÎ½ºÅÏ½º¸¦ ¼³Á¤
-            DontDestroyOnLoad(gameObject); // ¾À ÀüÈ¯ÀÌ µÇ¾îµµ ÆÄ±«µÇÁö ¾ÊÀ½
-            soundSource = gameObject.AddComponent<AudioSource>(); // AudioSource¸¦ Ãß°¡ÇÏ¿© »ç¿îµå¸¦ Àç»ıÇÒ ÁØºñ
+            instance = this; // í˜„ì¬ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì„¤ì •
+            DontDestroyOnLoad(gameObject); // ì”¬ ì „í™˜ì´ ë˜ì–´ë„ íŒŒê´´ë˜ì§€ ì•ŠìŒ
+            soundSource = gameObject.AddComponent<AudioSource>(); // AudioSourceë¥¼ ì¶”ê°€í•˜ì—¬ ì‚¬ìš´ë“œë¥¼ ì¬ìƒí•  ì¤€ë¹„
         }
-        else // ÀÎ½ºÅÏ½º°¡ ÀÌ¹Ì Á¸ÀçÇÏ¸é?
+        else // ì¸ìŠ¤í„´ìŠ¤ê°€ ì´ë¯¸ ì¡´ì¬í•˜ë©´?
         {
-            Destroy(gameObject); // »õ·Î »ı¼ºµÈ ÀÎ½ºÅÏ½º ÆÄ±«
+            Destroy(gameObject); // ìƒˆë¡œ ìƒì„±ëœ ì¸ìŠ¤í„´ìŠ¤ íŒŒê´´
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        soundSource.PlayOneShot(clip); // ÁÖ¾îÁø AudioClipÀ» Àç»ı
+        soundSource.PlayOneShot(clip); // ì£¼ì–´ì§„ AudioClipì„ ì¬ìƒ
     }
 }

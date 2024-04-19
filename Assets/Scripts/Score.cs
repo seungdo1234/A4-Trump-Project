@@ -17,7 +17,7 @@ public class Score : MonoBehaviour //2024.04.18
     
     public void UpdateScoreText()
     {
-        float timePercentage = gm.timer / gm.maxTime * 100f;
+        float timePercentage = gm.timer / gm.maxTime[(int)DifficultyManager.instance.difficulty] * 100f;
         int score = CalculateScore(timePercentage);
        // resultUI.TextChange(ResultTextType.Score,  $"<color=red>{score}</color> 점");
        gm.ResultUI.TextChange(ResultTextType.Score,  $"<color=red>{score}</color> 점");
