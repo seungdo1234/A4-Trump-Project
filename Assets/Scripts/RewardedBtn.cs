@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -9,7 +10,8 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
     string _adUnitId = null; // This will remain null for unsupported platforms
- 
+
+    private bool Ad_End = false;
         
     void Start()
     {   
@@ -54,6 +56,8 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         // 2024.04.18 - 은지, 광고 보여질 때 BGM 멈추기
         AudioManager.instance.StopBGM();
+        // 2024.04.19 - 시원, 비동기 LoadScene Coroutine 시작
+        StartCoroutine(LoadScene());
         // Disable the button:
         _showAdButton.interactable = false;
         // Then show the ad:
@@ -68,7 +72,8 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
         {
             Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            SceneManager.LoadScene("StartScene");
+            // 2024.04.19 - 시원, 기존의 LoadScene 삭제 및 광고가 끝났다는 Bool 값 변경
+            Ad_End = true;
             // 2024.04.18 - 은지, 시작 씬 로드될 때 배경음악 변경 & play
             AudioManager.instance.SwitchBGMtoStandard();
             Time.timeScale = 1.0f;
@@ -95,5 +100,22 @@ public class RewardedBtn : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowLi
     {
         // Clean up the button listeners:
         _showAdButton.onClick.RemoveAllListeners();
+    }
+
+    //2024.04.19 시원 - 비동기식 LoadScene Coroutine
+    IEnumerator LoadScene()
+    {
+        //비동기식으로 LoadScene 시작, LoadSceneMode.Additive > LoadScene방식을 현재 Scene에 추가로 Scene을 더 Load하는 방식
+        UnityEngine.AsyncOperation asyncOper = SceneManager.LoadSceneAsync("StartScene", LoadSceneMode.Additive);
+
+        //광고가 끝나고 LoadSceneAsync가 완료될때까지 While 반복
+        while (!Ad_End || !asyncOper.isDone)
+        {
+            yield return null;
+        }
+
+        //광고가 끝나고 SceneLoad가 끝났다면 ActiveScene을 StartScene으로 변경해주고 MainScene은 Unload
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartScene"));
+        SceneManager.UnloadSceneAsync("MainScene");
     }
 }
