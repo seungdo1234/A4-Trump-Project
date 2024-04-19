@@ -9,17 +9,21 @@ public class GameManager : MonoBehaviour
     public Card FirstCard { get; set; }
     public Card SecondCard { get; set; }
     
-    [SerializeField] private float maxTime;
-    [SerializeField] private Text resultText; // 매칭 시도 횟수 텍스트
-    private int matchingCount; // 매칭 시도 횟수를 저장하는 변수
+    [Header("# Game Information")]
+    public float maxTime;
+    
+    [Header("# Component")]
+    [SerializeField] private ResultUI resultUI; // 매칭 시도 횟수 텍스트
     [SerializeField] private Text timeText;
-    [SerializeField] private GameObject result_UI;
     [SerializeField] private GameObject MatchFailText; // 매칭이 실패했을 때 나오는 시간 차감 텍스트
     private AudioSource audioSource;
     [SerializeField] private AudioClip matchAudio;
     [SerializeField] private AudioClip bgm1; // 2024.04.16
     [SerializeField] private AudioClip FailAudio; // 2024.04.18
+    [SerializeField] private AudioClip clearBGM; // 2024.04.19
+    [SerializeField] private AudioClip overBGM; // 2024.04.19
     [SerializeField] private Animator Text_Animator; // 타이머 텍스트 애니메이션
+    [SerializeField] private Score score;
     public string[] cardNames; // 이미지에 매칭될 이름 배열
     public Text displayText; // 텍스트를 표시할 UI(Text) 요소
     public float displayTime = 1f; // 텍스트가 표시될 시간
@@ -30,10 +34,11 @@ public class GameManager : MonoBehaviour
     
     public int CardCount { get; set; }
     [HideInInspector]public bool isPlay;
-    private float timer = 0;
-    private bool isBgm1Played = false; //// 2024.04.16
+    [HideInInspector]public float timer = 0;
+    private bool isBgm1Played = false; // 2024.04.16
+    private bool isClear = false; // 2024.04.19
     private MatchFailText Match_Fail;
-
+    [HideInInspector]public int matchingCount; // 매칭 시도 횟수를 저장하는 변수
     private void Awake()
     {
         if (instance == null)
@@ -65,8 +70,9 @@ public class GameManager : MonoBehaviour
                 isBgm1Played = true;
                 timeText.color = Color.red;
             }
-            if (timer <= 0 )
+            if (timer < 0 )
             {
+                resultUI.TextChange(ResultTextType.Title,  $"Game Over !");
                 timer = 0;
                 GameEnd();
             }
@@ -83,17 +89,31 @@ public class GameManager : MonoBehaviour
     }
     private void GameEnd()
     {
-        // 매칭 시도 횟수 text 오브젝트에 저장
-        resultText.text = $"매칭 시도 : <color=red>{matchingCount}</color>";
+        // 2024.04.19
+        AudioManager.instance.StopBGM();
+        if (isClear)
+        {
+            audioSource.PlayOneShot(clearBGM);
+        }
+        else
+        {
+            audioSource.PlayOneShot(overBGM);
+        }
+        // 매칭 시도 횟수 text 오브젝트에 저장S
+       // resultText.text = $"매칭 시도 : <color=red>{matchingCount}</color>번";
+        string format = $"매칭 시도 : <color=red>{matchingCount}</color>번";
+        resultUI.TextChange(ResultTextType.Match,  format);
         isPlay = true;
         Time.timeScale = 0f;
-        result_UI.SetActive(true);
+        resultUI.UI_OnOff(true);
     }
     public void Matched()
     {
         // 같은 카드라면
         if (FirstCard.idx == SecondCard.idx)
         {
+            score.UpdateScoreText();
+            
             // 매칭된 카드의 이미지에 해당하는 텍스트 표시
             displayText.text = cardNames[FirstCard.idx]; // 카드의 idx에 해당하는 이름을 가져와서 표시
 
@@ -108,6 +128,8 @@ public class GameManager : MonoBehaviour
 
             if (CardCount == 0)
             {
+                resultUI.TextChange(ResultTextType.Title,  $"Game Clear !");
+                isClear = true;
                 float shortTime = maxTime - timer;
                 DifficultyManager.instance.UnLock(shortTime);
                 GameEnd();
