@@ -1,6 +1,6 @@
-<p align="center">
-    <img src="https://github.com/JeongEunJi1127/practice/assets/43170505/065e856c-5190-42c3-9841-fbad23313aa5" alt="coding" width="150px" />
-</p>
+<br/>
+<br/>
+
 <p align="center"> A4-Trump-Project  </p>
 
 ##### <p align="center"> <b> _with 내일 배움 캠프 1주차 팀프로젝트_ </b>
