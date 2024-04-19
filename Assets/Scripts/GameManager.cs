@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     
     [Header("# Component")]
     [SerializeField] private ResultUI resultUI; // 매칭 시도 횟수 텍스트
+
+    public ResultUI ResultUI { get => resultUI; }
     [SerializeField] private Text timeText;
     [SerializeField] private GameObject MatchFailText; // 매칭이 실패했을 때 나오는 시간 차감 텍스트
     private AudioSource audioSource;
@@ -101,6 +103,7 @@ public class GameManager : MonoBehaviour
         }
         // 매칭 시도 횟수 text 오브젝트에 저장S
        // resultText.text = $"매칭 시도 : <color=red>{matchingCount}</color>번";
+       // 24.4.19 승도 => 코드 리팩토링
         string format = $"매칭 시도 : <color=red>{matchingCount}</color>번";
         resultUI.TextChange(ResultTextType.Match,  format);
         isPlay = true;

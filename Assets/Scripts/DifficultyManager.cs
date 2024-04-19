@@ -25,8 +25,6 @@ public class DifficultyManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
     }
 
     // Easy나 Normal을 처음 클리어 했을 경우 실행되는 함수
